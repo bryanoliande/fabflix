@@ -1,0 +1,46 @@
+<!-- . The ACTORS Table -->
+<!-- The actors are arranged alphabetically by last stagename. -->
+<!-- There is one entry for each actor, but not all actors listed in CAST are documented. -->
+<!-- There are also comment entries  for each letter of the alphabet.<BR> -->
+
+<!ELEMENT actors (stagename, dowstart, dowend?,  familyname?, firstname?, alias*, gender?, dob?, dod?, type?, origin, picref, studio?, relationships, awards?, notes, error?) >
+
+<!ELEMENT stagename (#PCDATA)>				<!--  Comment:  Name  used by the actor in movies. This is nearly the key of the table. There are a few actors with identical names. Then the birthyear (dob) becomes important.  -->
+<!ELEMENT dowstart (#PCDATA)> 				<!--  Comment: Beginning of "dates of work" interval: year of first movie . --> 
+<!ELEMENT dowend (#PCDATA)> 				<!--  Comment: End of "dates of work" interval. . --> 
+<!ELEMENT familyname (#PCDATA)> 			<!--  Comment: Original last name. --> 
+<!ELEMENT firstname	(#PCDATA)> 				<!--  Comment: Original first name.  --> 
+<!ELEMENT alias	(#PCDATA)> 					<!--  Comment: Nick-names or other assumed names used. . --> 
+<!ELEMENT gender (#PCDATA)> 				<!--  Coded as M,F, X(unknown), G (group), A (animal). --> 
+<!ELEMENT dob (#PCDATA)> 					<!--  Comment: Date of Birth. If not known, not entered. --> 
+<!ELEMENT dod (#PCDATA)> 					<!--  Comment: Date of Death, if unknown or alive not entered.  Year+ indicates also still alive in that year, mainly used for oldies. --> 
+<!ELEMENT roletype (rolecode+) > 			<!--  Comment: typical role played by actor. --> 
+	 <!ELEMENT rolecode (#PCDATA)> 			<!--  Comment: coded roles, per codes.xml. --> 
+<!ELEMENT origin (bgnd?) > 					<!--  Comment: Country of origin, see codes.xml. -->
+	 <!ELEMENT bgnd (#PCDATA)> 				<!--  Comment: other origin information  -->
+<!ELEMENT picref (#PCDATA)> 				<!--  Comment: Photos in reference books,cited as [book.page(-s)] . --> 
+<!ELEMENT studio (strel?) > 				<!--  Comment: Contract studio for actor. -->
+	 <!ELEMENT strel (#PCDATA)> 			<!--  Comment: relationship to studio, as founder  -->
+<!ELEMENT relationships (relship*) > 
+	 <!ELEMENT relship (reltype, towhom*) > 
+			<!ELEMENT reltype (#PCDATA)> 									<!--  Coded as relcode, for instance, -->
+																			<!-- Marriages(Mt), Lived-with(Lw), Parent (Pa), Child (Ch), -->
+																			<!-- Family(Fa),  Worked-with(Ww), InfluencedBy (Inb), Groupmember (Mem) -->
+			<!ELEMENT towhom (relname, relattr*, relnote?) > 				<!-- subject of relship -->
+				 <!ELEMENT relname (#PCDATA)>  								<!-- related subject's name, maybe in actors or people file.  -->
+				 <!ELEMENT relattr (#PCDATA)> 								<!-- Comment: movie role of subject person, as A, D, P, if listed, else N -->
+				 <!ELEMENT relnote (#PCDATA)> 								<!-- Comment: info, as relationship to actor -->
+<!ELEMENT awards (award+)>	 												<!--  Comment: Used  for  Awards . -->
+	 <!ELEMENT award (awardtype, awardyear?, awardattr?) >					<!--  Comment: specific award . -->
+			<!ELEMENT awardtype (#PCDATA)> 											<!--  Comment: specific award type. Coded per awardsfile. -->
+	 		<!ELEMENT awardattr (#PCDATA)> 											<!--  Comment: attributes of ward, as special, honorary, rank. -->
+			<!ELEMENT awardyear (#PCDATA)> 											<!--  Comment: year of award. -->
+<!ELEMENT notes (mainly?, studio?, also?, facts?, ref?, refs?, alias?, type?)> 		<!-- Comment: notes about actor. -->
+	 <!ELEMENT mainly (#PCDATA)> 													<!-- Comment: main activity, if not movie actor. -->
+	 <!ELEMENT type (#PCDATA)>
+	 <!ELEMENT also (#PCDATA)> 														<!-- Comment: other activity, beyond movie actor. -->
+	 <!ELEMENT facts (#PCDATA)> 													<!-- Comment: miscellaneous interesting facts. -->
+	 <!ELEMENT ref (#PCDATA)>
+	 <!ELEMENT refs (#PCDATA)> 														<!-- Comment: sources for information. -->
+<!ELEMENT error	(#PCDATA)> 															<!-- Comment: A code Cit(n) indicates how frequently the actor is cited in CASTS.html. This field is used for maintenance, as a weight of importance for completion of the data. . --> 
+

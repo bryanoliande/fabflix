@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Copyright 2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <resource-ref>
+    <description>
+      Resource reference to a factory for java.sql.Connection
+      instances that may be used for talking to a particular
+      database that is configured in the server.xml file.
+    </description>
+    <res-ref-name>
+      jdbc/Moviedb
+    </res-ref-name>
+    <res-type>
+      javax.sql.DataSource
+    </res-type>
+    <res-auth>
+      Container
+    </res-auth>
+  </resource-ref>
+
+ <!--
+  <security-constraint>
+   <web-resource-collection>
+      <web-resource-name>HTTPSOnly</web-resource-name>
+      <url-pattern>/*</url-pattern>
+   </web-resource-collection>
+   <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+   </user-data-constraint>
+  </security-constraint>
+-->
+
+    <display-name>Fablix</display-name>
+    <description>
+      A movie database for CS 122b.
+    </description>
+
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- Define servlets that are included in the example application -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>movies.Login</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MovieListServlet</servlet-name>
+    <servlet-class>movies.MovieList</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MovieListServlet</servlet-name>
+    <url-pattern>/movielist/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Home Page -->
+  <servlet>
+    <servlet-name>HomeServlet</servlet-name>
+    <jsp-file>/WEB-INF/home.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+
+  <!-- Browse for Movies  -->
+  <servlet>
+    <servlet-name>BrowserServlet</servlet-name>
+    <jsp-file>/WEB-INF/browser.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>BrowserServlet</servlet-name>
+    <url-pattern>/browse/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>BrowserSearchServlet</servlet-name>
+    <servlet-class>movies.browserSearch</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>BrowserSearchServlet</servlet-name>
+    <url-pattern>/browserSearch/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Search for Movies  -->
+  <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <jsp-file>/WEB-INF/search.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+
+  <!-- Single Movie -->
+  <servlet>
+    <servlet-name>SingleMovieServlet</servlet-name>
+    <servlet-class>movies.SingleMovie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SingleMovieServlet</servlet-name>
+    <url-pattern>/movie/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Single Star -->
+  <servlet>
+    <servlet-name>SingleStarServlet</servlet-name>
+    <servlet-class>movies.SingleStar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SingleStarServlet</servlet-name>
+    <url-pattern>/star/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Shopping Cart -->
+  <servlet>
+    <servlet-name>ShoppingCart</servlet-name>
+    <servlet-class>movies.Cart</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ShoppingCart</servlet-name>
+    <url-pattern>/cart/*</url-pattern>
+  </servlet-mapping>
+
+<!-- Checkout -->
+  <servlet>
+    <servlet-name>Checkout</servlet-name>
+    <jsp-file>/WEB-INF/checkout.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Checkout</servlet-name>
+    <url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+
+  <!-- ThankYou  -->
+  <servlet>
+    <servlet-name>ThankYou</servlet-name>
+    <servlet-class>movies.Checkout</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ThankYou</servlet-name>
+    <url-pattern>/thankyou</url-pattern>
+  </servlet-mapping>
+
+  <!-- ReadMe  -->
+  <servlet>
+    <servlet-name>ReadMe</servlet-name>
+    <jsp-file>/WEB-INF/readme.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ReadMe</servlet-name>
+    <url-pattern>/reports/readme</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LikePredicate</servlet-name>
+    <jsp-file>/WEB-INF/likepredicate.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LikePredicate</servlet-name>
+    <url-pattern>/reports/like-predicate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>XMLOptimization</servlet-name>
+    <jsp-file>/WEB-INF/XMLOptimization.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>XMLOptimization</servlet-name>
+    <url-pattern>/reports/xml_parsing_optimization</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ConnectionPooling</servlet-name>
+    <jsp-file>/WEB-INF/connectionPooling.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ConnectionPooling</servlet-name>
+    <url-pattern>/reports/connection_pooling</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>JmeterReport</servlet-name>
+    <jsp-file>/WEB-INF/jmeter_report.html</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>JmeterReport</servlet-name>
+    <url-pattern>/reports/jmeter_report.html</url-pattern>
+  </servlet-mapping>
+
+  <!-- Ajax  -->
+  <servlet>
+    <servlet-name>AjaxMovieServlet</servlet-name>
+    <servlet-class>movies.AjaxMovie</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AjaxMovieServlet</servlet-name>
+    <url-pattern>/ajaxMovie</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AjaxSearchServlet</servlet-name>
+    <servlet-class>movies.AjaxSearch</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AjaxSearchServlet</servlet-name>
+    <url-pattern>/ajaxSearch</url-pattern>
+  </servlet-mapping>
+
+<!-- Employee Dashboard  -->
+  <servlet>
+    <servlet-name>DashboardIndex</servlet-name>
+    <jsp-file>/WEB-INF/dashboardView/dashboardIndex.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DashboardIndex</servlet-name>
+    <url-pattern>/_dashboard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DashboardHome</servlet-name>
+    <jsp-file>/WEB-INF/dashboardView/dashboard.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DashboardHome</servlet-name>
+    <url-pattern>/_dashboard/home</url-pattern>
+  </servlet-mapping>
+
+   <servlet>
+    <servlet-name>DashboardLoginServlet</servlet-name>
+    <servlet-class>dashboard.DashboardLogin</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DashboardLoginServlet</servlet-name>
+    <url-pattern>/_dashboard/login</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Metadata  -->
+  <servlet>
+    <servlet-name>Metadata</servlet-name>
+    <servlet-class>dashboard.Metadata</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Metadata</servlet-name>
+    <url-pattern>/_dashboard/metadata</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Insert Star  -->
+  <servlet>
+    <servlet-name>InsertStarJsp</servlet-name>
+    <jsp-file>/WEB-INF/dashboardView/insertstar.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InsertStarJsp</servlet-name>
+    <url-pattern>/_dashboard/insertstar</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>InsertStarResultsServlet</servlet-name>
+    <servlet-class>dashboard.InsertStar</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InsertStarResultsServlet</servlet-name>
+    <url-pattern>/_dashboard/InsertStarResults</url-pattern>
+  </servlet-mapping>
+
+  <!-- Add Movie  -->
+  <servlet>
+    <servlet-name>InsertMovieJsp</servlet-name>
+    <jsp-file>/WEB-INF/dashboardView/addMovie.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InsertMovieJsp</servlet-name>
+    <url-pattern>/_dashboard/addmovie</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddMovieServlet</servlet-name>
+    <servlet-class>dashboard.AddMovie</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AddMovieServlet</servlet-name>
+    <url-pattern>/_dashboard/addMovieServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Add Info  -->
+  <servlet>
+    <servlet-name>AddInfoJsp</servlet-name>
+    <jsp-file>/WEB-INF/dashboardView/addInfo.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AddInfoJsp</servlet-name>
+    <url-pattern>/_dashboard/addinfo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddInfoServlet</servlet-name>
+    <servlet-class>dashboard.AddInfo</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AddInfoServlet</servlet-name>
+    <url-pattern>/_dashboard/addInfoServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MobileLoginServlet</servlet-name>
+    <servlet-class>fabflixmobile.MobileLogin</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MobileLoginServlet</servlet-name>
+    <url-pattern>/fablixmobile/mobilelogin</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>MobileSearchServlet</servlet-name>
+    <servlet-class>fabflixmobile.MobileSearch</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MobileSearchServlet</servlet-name>
+    <url-pattern>/fablixmobile/MobileSearch/*</url-pattern>
+  </servlet-mapping>
+
+  
+<filter>
+	<filter-name>TimeFilter</filter-name>
+	<filter-class>movies.TimeFilter</filter-class>
+</filter>
+
+<filter-mapping>
+	<filter-name>TimeFilter</filter-name>
+	<url-pattern>/movielist/*</url-pattern>
+</filter-mapping>
+
+ 
+
+<!-- Filters ....................................................... -->
+<!--
+<filter>
+  <filter-name>LoginFilter</filter-name>
+  <filter-class>movies.AuthenticationFilter</filter-class>
+  <init-param>
+    <param-name>loginServlet</param-name>
+    <param-value>/login</param-value>
+  </init-param>
+  <init-param>
+    <param-name>dashboard</param-name>
+    <param-value>/_dashboard</param-value>
+  </init-param>
+</filter>
+
+<filter-mapping>
+  <filter-name>LoginFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+
+
+
+<filter>
+  <filter-name>DashboardFilter</filter-name>
+  <filter-class>dashboard.DashboardFilter</filter-class>
+  <init-param>
+    <param-name>dashboardLogin</param-name>
+    <param-value>/_dashboard/login</param-value>
+  </init-param>
+  <init-param>
+    <param-name>dashboard</param-name>
+    <param-value>/_dashboard</param-value>
+  </init-param>
+</filter>
+
+<filter-mapping>
+  <filter-name>DashboardFilter</filter-name>
+  <url-pattern>/_dashboard/*</url-pattern>
+</filter-mapping>
+-->
+
+</web-app>

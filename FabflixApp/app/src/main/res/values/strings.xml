@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fabflix</string>
+    <string name = "username">Enter Your Email</string>
+    <string name = "password">Enter Your Password</string>
+</resources>

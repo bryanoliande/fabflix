@@ -1,0 +1,114 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color: linen;
+}
+
+td {
+    border-top-style: solid;
+}
+</style>
+</head>
+<body>
+
+<table style="width:100%">
+  <tr style="font-weight:bold; background-color: orange">
+    <td width="300px">Single-instance version cases</td>
+    <td>Graph Results Screenshot</td>
+    <td>Average Query Time(ms)</td>
+    <td>Average Search Servlet Time(ms)</td>
+    <td>Average JDBC Time(ms)</td>
+    <td>Analysis</td>
+  </tr>
+  <tr>
+    <td>Case 1: HTTP/1 thread</td>
+    <td><img src="../photos/test1.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
+    <td>343</td>
+    <td>247</td>
+    <td>62</td>
+    <td>Base case for our analysis. At a glance it's faster than multiple threads running.</td>
+  </tr>
+  <tr>
+    <td>Case 2: HTTP/10 threads</td>
+    <td><img src="../photos/test2.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
+    <td>2225</td>
+    <td>2126</td>
+    <td>92</td>
+    <td>Slower than a single thread which makes sense and tends to slow down a little overtime.</td>
+  </tr>
+  <tr>
+    <td>Case 3: HTTPS/10 threads</td>
+    <td><img src="../photos/test3.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;"></td>
+    <td>2465</td>
+    <td>2251</td>
+    <td>96</td>
+    <td>Almost the same as http. Because there needs to be a few extra handshakes due to https for certificate authentication, the times are slightly slower but not significant.</td>
+  </tr>
+  <tr>
+    <td>Case 4: HTTP/10 threads/No prepared statements</td>
+    <td><img src="../photos/test4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>2203</td>
+    <td>2103</td>
+    <td>94</td>
+    <td>Pooling speeds things up a little bit but doesnt' appear to have a significant effect based off of our test cases. The servlet speed slighly increases but the jdbc logic doesn't. This is because the connections reused don't speed things up significantly but preventing a new connection being made increases performance.</td>
+  </tr>
+  <tr>
+    <td>Case 5: HTTP/10 threads/No connection pooling</td>
+    <td><img src="../photos/test5.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>1286</td>
+    <td>1143</td>
+    <td>31</td>
+    <td>Prepared statements clearly have a significant effect on the speed of queries and makes up for most of the time compared to pooling. This is because compiliation of sql statements can be skipped such as validation, rewrite, and transformation.</td>
+  </tr>
+
+</table> 
+
+
+<table style="width:100%">
+  <tr style="font-weight:bold; background-color: orange">
+    <td width="300px">Scaled version cases</td>
+    <td>Graph Results Screenshot</td>
+    <td>Average Query Time(ms)</td>
+    <td>Average Search Servlet Time(ms)</td>
+    <td>Average JDBC Time(ms)</td>
+    <td>Analysis</td>
+  </tr>
+  <tr>
+    <td>Case 1: HTTP/1 thread</td>
+    <td><img src="../photos/Test 1.jpg" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
+    <td>60</td>
+    <td>155</td>
+    <td>300</td>
+    <td>Average query time is faster than that of the signle instance. This can be attributed to the fact that requests are being sent to the backend servers</td>
+  </tr>
+  <tr>
+    <td>Case 2: HTTP/10 threads</td>
+    <td><img src="../photos/Test 1.jpg" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
+    <td>69</td>
+    <td>1450</td>
+    <td>2023</td>
+    <td>Having 10 threads slows down overtime, but the query time is still faster than that of the single instance</td>
+  </tr>
+  <tr>
+    <td>Case 3: HTTP/10 threads/No prepared statements</td>
+    <td><img src="../photos/Test 1.jpg" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>67</td>
+    <td>1330</td>
+    <td>1860</td>
+    <td>Both query time and search time are sped up by connection pooling, but not by a large amount.</td>
+  </tr>
+  <tr>
+    <td>Case 4: HTTP/10 threads/No connection pooling</td>
+    <td><img src="../photos/Test 1.jpg" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>98</td>
+    <td>1012</td>
+    <td>1134</td>
+    <td>Both query time and search time are sped up by the prepared statements by alot. This test ran faster than all of the others showing that prepared statements are a powerful tool</td>
+  </tr>
+
+</table> 
+
+</body>
+</html>
